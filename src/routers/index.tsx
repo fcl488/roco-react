@@ -23,7 +23,22 @@ const router_item = [
                 path: 'home',
                 label: 'home',
                 element: lazyLoad(lazy(()=>delayForDemo(import('@/pages/home'))))
-            }
+            },
+            {
+                path: 'news',
+                label: 'news',
+                element: lazyLoad(lazy(()=>delayForDemo(import('@/pages/news'))))
+            },
+            {
+                path: 'notice',
+                label: 'notice',
+                element: lazyLoad(lazy(()=>delayForDemo(import('@/pages/notice'))))
+            },
+            {
+                path: 'handbook',
+                label: 'handbook',
+                element: lazyLoad(lazy(()=>delayForDemo(import('@/pages/handbook'))))
+            },
         ]
     },
     { path: '/404', label: '404', element: <NotFound /> },

@@ -1,29 +1,61 @@
 import { Outlet } from "react-router-dom"
-import './index.scss'
+import style from './index.module.scss'
+import { useState } from "react"
+
+const styles = {
+    nav_item_notice_active: {
+        borderTopLeftRadius: '5px',
+        borderTopRightRadius: '5px',
+        backgroundColor: '#03a9f4',
+        color: '#fff',
+    },
+    nav_item_handbook_active: {
+        borderTopLeftRadius: '5px',
+        borderTopRightRadius: '5px',
+        backgroundColor: '#ff9600',
+        color: '#fff',
+    },
+    nav_item_news_active: {
+        borderTopLeftRadius: '5px',
+        borderTopRightRadius: '5px',
+        backgroundColor: '#4caf50',
+        color: '#fff',
+    }
+}
+
 
 const Layout = () => {
+
+    const [isActive, setIsActive] = useState<number>(-1)
+
+    const changeActive = (param: number) =>{
+        setIsActive(param)
+    }
+
     return (
         <>
-            <div className="header">
-                <div className="header-body">
-                    <div className="header-title">
+            <div className={style.header}>
+                <div className={style.header_body}>
+                    <div className={style.header_title}>
+                        <a href="#/layout/home" onClick={()=>changeActive(-1)}>
                         <img src="https://www.pokemon.cn/img/common/logo.png" alt="" />
+                        </a>
                     </div>
-                    <div className="nav">
-                        <div className="nav-body">
-                            <ul className="nav-list">
-                                <li className="nav-item">
-                                    <a href="#" className="nav-item_notice">
+                    <div className={style.nav}>
+                        <div className={style.nav_body}>
+                            <ul className={style.nav_list}>
+                                <li className={style.nav_item} onClick={()=>changeActive(0)}>
+                                    <a href="#/layout/notice" className={style.nav_item_notice} style={ (isActive === 0) ? styles.nav_item_notice_active : undefined }>
                                         <span>站内公告</span>
                                     </a>
                                 </li>
-                                <li className="nav-item">
-                                    <a href="#" className="nav-item_library">
+                                <li className={style.nav_item} onClick={()=>changeActive(1)}>
+                                    <a href="#/layout/handbook" className={style.nav_item_library} style={ (isActive === 1) ? styles.nav_item_handbook_active : undefined }>
                                         <span>洛克图鉴</span>
                                     </a>
                                 </li>
-                                <li className="nav-item">
-                                    <a href="#" className="nav-item_news">
+                                <li className={style.nav_item} onClick={()=>changeActive(2)}>
+                                    <a href="#/layout/news" className={style.nav_item_news} style={ (isActive === 2) ? styles.nav_item_news_active : undefined }>
                                         <span>新闻公告</span>
                                     </a>
                                 </li>
@@ -32,7 +64,9 @@ const Layout = () => {
                     </div>
                 </div>
             </div>
-            <Outlet />
+            <div className={style.content}>
+                <Outlet />
+            </div>
         </>
     )
 }
