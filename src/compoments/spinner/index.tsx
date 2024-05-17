@@ -1,5 +1,5 @@
 const Spinner = () => {
-    return(
+    return (
         <>
             <div>loading...</div>
         </>

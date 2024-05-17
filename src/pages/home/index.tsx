@@ -1,5 +1,5 @@
 const Home = () => {
-    return(
+    return (
         <div>home</div>
     )
 }

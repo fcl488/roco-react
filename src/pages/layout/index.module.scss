@@ -1,3 +1,6 @@
+.ant_affix {
+    font-family: '';
+}
 .header {
     padding: 2px 0;
     background-color: #fff;
@@ -117,11 +120,18 @@
     }
 }
 
-.content {
-    color: #000;
-    font-size: 1.6rem;
-    line-height: 1.6;
-    max-width: 1400px;
-    width: 100%;
-    margin: 0 auto;
+.container {
+    background-color: #f2f3f5;
+    padding: 6px 0;
+    height: 100%;
+    &_content {
+        color: #000;
+        font-size: 1.6rem;
+        line-height: 1.6;
+        max-width: 1400px;
+        width: 100%;
+        margin: 0 auto;
+        background-color: #fff;
+        padding: 10px;
+    }
 }

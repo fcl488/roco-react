@@ -1,0 +1,19 @@
+.type_box {
+  width: 45%;
+  border-radius: 1em;
+  border: 1px solid #000;
+  margin: .5em .25em;
+  span {
+    color: #fff;
+    text-align: center;
+    width: 100%;
+    display: block;
+    text-shadow: 0 0 5px rgba(0, 0, 0, .75);
+  }
+  &_grass {
+    border-color: #b4f000;
+    background-color: #92bf19;
+    -webkit-box-shadow: 0 0 .25em .03em #92bf19;
+    box-shadow: 0 0 .25em .03em #92bf19;
+  }
+}
