@@ -1,108 +1,100 @@
 import style from './index.module.scss'
-import { Input } from 'antd';
-import { Select } from 'antd';
-import { Card, Col, Row, Image } from "antd";
-const { Search } = Input;
-import Type from '@/compoments/type';
-
+import { Input } from 'antd'
+import { Select } from 'antd'
+import { Card, Col, Row, Image } from 'antd'
+const { Search } = Input
+import Type from '@/compoments/type'
 
 const handleChange = (value: string) => {
-    console.log(`selected ${value}`);
-};
+  console.log(`selected ${value}`)
+}
 
 const Handbook = () => {
-    return (
-        <>
-            <div className={style.search_area}>
-                <Search placeholder="使用名称或图鉴编号搜索" enterButton="Search" size="large" />
-            </div>
-            <div className={style.category_area}>
-                <div className={style.category_area_title}>
-                    属性
-                </div>
-                <div className={style.category_area_list}>
-                    <label className={`${style.category_area_list_type} ${style.category_area_list_type_normal}`} ><span>普通</span></label>
-                    <label className={`${style.category_area_list_type} ${style.category_area_list_type_fire}`} ><span>火</span></label>
-                </div>
-
-            </div>
-            <div className={style.banner}>
-                <Select
-                    defaultValue="图鉴编号由小至大"
-                    style={{ width: 200, height: 30 }}
-                    onChange={handleChange}
-                    options={[
-                        { value: '0', label: '图鉴编号由小至大' },
-                        { value: '1', label: '图鉴编号由大至小' },
-                    ]}
+  return (
+    <>
+      <div className={style.search_area}>
+        <Search
+          placeholder='使用名称或图鉴编号搜索'
+          enterButton='Search'
+          size='large'
+        />
+      </div>
+      <div className={style.category_area}>
+        <div className={style.category_area_title}>属性</div>
+        <div className={style.category_area_list}>
+          <label
+            className={`${style.category_area_list_type} ${style.category_area_list_type_normal}`}
+          >
+            <span>普通</span>
+          </label>
+          <label
+            className={`${style.category_area_list_type} ${style.category_area_list_type_fire}`}
+          >
+            <span>火</span>
+          </label>
+        </div>
+      </div>
+      <div className={style.banner}>
+        <Select
+          defaultValue='图鉴编号由小至大'
+          style={{ width: 200, height: 30 }}
+          onChange={handleChange}
+          options={[
+            { value: '0', label: '图鉴编号由小至大' },
+            { value: '1', label: '图鉴编号由大至小' },
+          ]}
+        />
+      </div>
+      <div className={style.handbook_list}>
+        <Row gutter={[16, 16]}>
+          <Col span={6}>
+            <Card hoverable className={style.handbook_list_card}>
+              <div className={style.handbook_list_card_img}>
+                <Image
+                  width={200}
+                  preview={false}
+                  src='https://www.pokemon.cn/play/resources/pokedex/img/pm/cf47f9fac4ed3037ff2a8ea83204e32aff8fb5f3.png'
                 />
-            </div>
-            <div className={style.handbook_list}>
-                <Row gutter={[16, 16]}>
-                    <Col span={6}>
-                        <Card hoverable className={style.handbook_list_card}>
-                            <div className={style.handbook_list_card_img}>
-                                <Image
-                                    width={200}
-                                    preview={false}
-                                    src="https://www.pokemon.cn/play/resources/pokedex/img/pm/cf47f9fac4ed3037ff2a8ea83204e32aff8fb5f3.png"
-                                />
-                            </div>
-                            <div className="number">0001</div>
-                            <div className="name">妙蛙种子</div>
-                            <div className="type" style={{ display: 'flex' }}><Type typeStr='grass' name='草'></Type><Type typeStr='poison' name='毒'></Type></div>
-                        </Card>
-                    </Col>
-                    <Col span={6}>
-                        <Card>
-                            Card content
-                        </Card>
-                    </Col>
-                    <Col span={6}>
-                        <Card>
-                            Card content
-                        </Card>
-                    </Col>
-                    <Col span={6}>
-                        <Card>
-                            Card content
-                        </Card>
-                    </Col>
-                    <Col span={6}>
-                        <Card>
-                            Card content
-                        </Card>
-                    </Col>
-                    <Col span={6}>
-                        <Card>
-                            Card content
-                        </Card>
-                    </Col>
-                    <Col span={6}>
-                        <Card>
-                            Card content
-                        </Card>
-                    </Col>
+              </div>
+              <div className='number'>0001</div>
+              <div className='name'>妙蛙种子</div>
+              <div className='type' style={{ display: 'flex' }}>
+                <Type typeStr='grass' name='草'></Type>
+                <Type typeStr='poison' name='毒'></Type>
+              </div>
+            </Card>
+          </Col>
+          <Col span={6}>
+            <Card>Card content</Card>
+          </Col>
+          <Col span={6}>
+            <Card>Card content</Card>
+          </Col>
+          <Col span={6}>
+            <Card>Card content</Card>
+          </Col>
+          <Col span={6}>
+            <Card>Card content</Card>
+          </Col>
+          <Col span={6}>
+            <Card>Card content</Card>
+          </Col>
+          <Col span={6}>
+            <Card>Card content</Card>
+          </Col>
 
-                    <Col span={6}>
-                        <Card>
-                            Card content
-                        </Card>
-                    </Col>
+          <Col span={6}>
+            <Card>Card content</Card>
+          </Col>
 
-                    <Col span={6}>
-                        <Card>
-                            Card content
-                        </Card>
-                    </Col>
-                </Row>
-
-            </div>
-            <div className="footer">
-                加载更多
-            </div>
-        </>
-    )
+          <Col span={6}>
+            <Card>Card content</Card>
+          </Col>
+        </Row>
+      </div>
+      <div className='footer'>加载更多</div>
+    </>
+  )
 }
 
 export default Handbook

@@ -1,12 +1,11 @@
 import Routers from '@/routers/index'
 function App() {
-
   return (
-   <>
-    <div>
-      <Routers></Routers>
-    </div>
-   </>
+    <>
+      <div>
+        <Routers></Routers>
+      </div>
+    </>
   )
 }
 

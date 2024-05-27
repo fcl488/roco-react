@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'axios'
 
 const request = axios.create({
   baseURL: '/api',
@@ -8,21 +8,25 @@ const request = axios.create({
   },
 })
 
-request.interceptors.request.use(config => {
-  return config
-}, error => {
-  console.log(error)
-  return Promise.reject(error)
-})
+request.interceptors.request.use(
+  (config) => {
+    return config
+  },
+  (error) => {
+    console.log(error)
+    return Promise.reject(error)
+  }
+)
 
-
-request.interceptors.response.use(res => {
-  console.log(res)
-  return res.data
-}, error => {
-  console.log(error)
-  return Promise.reject(error)
-})
-
+request.interceptors.response.use(
+  (res) => {
+    console.log(res)
+    return res.data
+  },
+  (error) => {
+    console.log(error)
+    return Promise.reject(error)
+  }
+)
 
 export default request
