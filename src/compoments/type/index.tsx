@@ -1,8 +1,7 @@
 import style from './index.module.scss'
 
-
 type spriteType = {
-  typeStr: string,
+  typeStr: string
   name: string
 }
 
@@ -108,7 +107,7 @@ const styles = {
     backgroundColor: '#3c64c8',
     WebkitBoxShadow: '0 0 .25em .03em #3c64c8',
     boxShadow: '0 0 .25em .03em #3c64c8',
-  }
+  },
 }
 
 const Type = ({ typeStr, name }: spriteType) => {
@@ -124,6 +123,45 @@ const Type = ({ typeStr, name }: spriteType) => {
     }
     if ('flying' === type) {
       return styles.flying
+    }
+    if ('water' === type) {
+      return styles.water
+    }
+    if ('bug' === type) {
+      return styles.bug
+    }
+    if ('normal' === type) {
+      return styles.normal
+    }
+    if ('dark' === type) {
+      return styles.dark
+    }
+    if ('electric' === type) {
+      return styles.electric
+    }
+    if ('psychic' === type) {
+      return styles.psychic
+    }
+    if ('ground' === type) {
+      return styles.ground
+    }
+    if ('ice' === type) {
+      return styles.ground
+    }
+    if ('ground' === type) {
+      return styles.ground
+    }
+    if ('fighting' === type) {
+      return styles.ground
+    }
+    if ('rock' === type) {
+      return styles.ground
+    }
+    if ('ghost' === type) {
+      return styles.ground
+    }
+    if ('dragon' === type) {
+      return styles.ground
     }
     return undefined
   }

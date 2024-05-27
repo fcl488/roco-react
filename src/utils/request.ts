@@ -1,4 +1,7 @@
 import axios from 'axios'
+import { useSelector } from 'react-redux'
+import { message } from 'antd'
+
 
 const request = axios.create({
   baseURL: '/api',
@@ -10,6 +13,7 @@ const request = axios.create({
 
 request.interceptors.request.use(
   (config) => {
+    config.headers['Authorization'] = useSelector((state:any) => state.user.token)
     return config
   },
   (error) => {
@@ -21,6 +25,9 @@ request.interceptors.request.use(
 request.interceptors.response.use(
   (res) => {
     console.log(res)
+    if(res.data.code === 0) {
+      message.error(res.data.message)
+    }
     return res.data
   },
   (error) => {

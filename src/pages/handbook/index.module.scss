@@ -30,6 +30,11 @@
         color: #a0a0a0;
         border-color: #a0a0a0;
         // font-size: 1.4rem;
+        &:hover {
+          cursor: pointer;
+          background-color: #a0a0a0;
+          color: #fff;
+        }
       }
 
       &_fire {
@@ -53,6 +58,34 @@
     &_img {
       display: flex;
       justify-content: center;
+      border-bottom: 1px solid #a0a0a0;
+    }
+    &_number {
+      // color: #03bafc;
+      font-size: 1.4rem;
+    }
+    &_name {
+      font-size: 1.7rem;
+    }
+  }
+}
+.load_more {
+  color: #fff;
+  margin-top: 1.3rem;
+  display: flex;
+  justify-content: center;
+  font-weight: 800;
+  &_btn {
+    width: 45%;
+    text-align: center;
+    background-color: #73daff;
+    padding: 0.4rem 0;
+    border-radius: 2rem;
+    &:hover {
+      cursor: pointer;
+      background-color: #fff;
+      color: #73daff;
+      border: 1px solid #73daff;
     }
   }
 }

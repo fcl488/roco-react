@@ -56,8 +56,8 @@ const Handbook = () => {
                   src='https://www.pokemon.cn/play/resources/pokedex/img/pm/cf47f9fac4ed3037ff2a8ea83204e32aff8fb5f3.png'
                 />
               </div>
-              <div className='number'>0001</div>
-              <div className='name'>妙蛙种子</div>
+              <div className={style.handbook_list_card_number}>0001</div>
+              <div className={style.handbook_list_card_name}>妙蛙种子</div>
               <div className='type' style={{ display: 'flex' }}>
                 <Type typeStr='grass' name='草'></Type>
                 <Type typeStr='poison' name='毒'></Type>
@@ -92,7 +92,11 @@ const Handbook = () => {
           </Col>
         </Row>
       </div>
-      <div className='footer'>加载更多</div>
+      <div className={style.load_more}>
+        <div className={style.load_more_btn}>
+          <span>查看更多</span>
+        </div>
+      </div>
     </>
   )
 }

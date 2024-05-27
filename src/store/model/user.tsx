@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { getToken } from '@/utils/token'
+import { getToken, setToken } from '@/utils/token'
 
 const user = createSlice({
   name: 'user',
@@ -17,8 +17,14 @@ const user = createSlice({
       const { payload } = action
       state.userInfo = payload
     },
+    setTokenInfo(state, action) {
+      const { payload } = action
+      state.token = payload
+      setToken(payload)
+    }
   },
 })
 
 export const { setUserInfo } = user.actions
+export const { setTokenInfo } = user.actions
 export default user
