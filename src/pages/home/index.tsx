@@ -8,9 +8,9 @@ const Home = () => {
     const dispatch = useDispatch()
     const sendTask = () => {
         console.log('sendTask')
-        dispatchTask().then(res => {
-            console.log(res)
-        })
+        // dispatchTask().then(res => {
+        //     console.log(res)
+        // })
         dispatch(setUserInfo({username: 'admin'}))
     }
 

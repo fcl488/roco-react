@@ -1,4 +1,5 @@
 import style from './index.module.scss'
+import { useState } from 'react'
 import { Input } from 'antd'
 import { Select } from 'antd'
 import { Card, Col, Row, Image } from 'antd'
@@ -9,7 +10,95 @@ const handleChange = (value: string) => {
   console.log(`selected ${value}`)
 }
 
+interface handbook {
+  id: string
+  name: string
+  imgUrl: string
+  types: type[]
+}
+
+interface type {
+  name: string
+  type: string
+}
+
 const Handbook = () => {
+  const [handbookList, setHandbookList] = useState<handbook[]>([
+    {
+      id: '0001',
+      name: '妙蛙种子',
+      imgUrl:
+        'https://www.pokemon.cn/play/resources/pokedex/img/pm/cf47f9fac4ed3037ff2a8ea83204e32aff8fb5f3.png',
+      types: [
+        {
+          type: 'grass',
+          name: '草',
+        },
+        {
+          type: 'poison',
+          name: '毒',
+        },
+      ],
+    },
+    {
+      id: '0002',
+      name: '妙蛙草',
+      imgUrl:
+        'https://www.pokemon.cn/play/resources/pokedex/img/pm/3245e4f8c04aa0619cb31884dbf123c6918b3700.png',
+      types: [
+        {
+          type: 'grass',
+          name: '草',
+        },
+        {
+          type: 'poison',
+          name: '毒',
+        },
+      ],
+    },
+  ])
+
+  const loadMore = () => {
+    const t: handbook[] = [
+      {
+        id: '0003',
+        name: '妙蛙花',
+        imgUrl:
+          'https://www.pokemon.cn/play/resources/pokedex/img/pm/0186d64c5773c8d3d03cd05dc79574b2d2798d4f.png',
+        types: [
+          {
+            type: 'grass',
+            name: '草',
+          },
+          {
+            type: 'poison',
+            name: '毒',
+          },
+        ],
+      },
+    ]
+    setHandbookList([...handbookList, ...t])
+  }
+
+  const renderHandbook = handbookList.map((item) => {
+    return (
+      <Col span={6} key={item.id}>
+        <Card hoverable className={style.handbook_list_card}>
+          <div className={style.handbook_list_card_img}>
+            <Image width={200} preview={false} src={item.imgUrl} />
+          </div>
+          <div className={style.handbook_list_card_number}>{item.id}</div>
+          <div className={style.handbook_list_card_name}>{item.name}</div>
+          <div className='type' style={{ display: 'flex' }}>
+            {item.types.map((el) => {
+              return <Type key={el.type} typeStr={el.type} name={el.name}></Type>
+            })}
+          </div>
+        </Card>
+      </Col>
+    )
+  })
+
   return (
     <>
       <div className={style.search_area}>
@@ -46,54 +135,10 @@ const Handbook = () => {
         />
       </div>
       <div className={style.handbook_list}>
-        <Row gutter={[16, 16]}>
-          <Col span={6}>
-            <Card hoverable className={style.handbook_list_card}>
-              <div className={style.handbook_list_card_img}>
-                <Image
-                  width={200}
-                  preview={false}
-                  src='https://www.pokemon.cn/play/resources/pokedex/img/pm/cf47f9fac4ed3037ff2a8ea83204e32aff8fb5f3.png'
-                />
-              </div>
-              <div className={style.handbook_list_card_number}>0001</div>
-              <div className={style.handbook_list_card_name}>妙蛙种子</div>
-              <div className='type' style={{ display: 'flex' }}>
-                <Type typeStr='grass' name='草'></Type>
-                <Type typeStr='poison' name='毒'></Type>
-              </div>
-            </Card>
-          </Col>
-          <Col span={6}>
-            <Card>Card content</Card>
-          </Col>
-          <Col span={6}>
-            <Card>Card content</Card>
-          </Col>
-          <Col span={6}>
-            <Card>Card content</Card>
-          </Col>
-          <Col span={6}>
-            <Card>Card content</Card>
-          </Col>
-          <Col span={6}>
-            <Card>Card content</Card>
-          </Col>
-          <Col span={6}>
-            <Card>Card content</Card>
-          </Col>
-
-          <Col span={6}>
-            <Card>Card content</Card>
-          </Col>
-
-          <Col span={6}>
-            <Card>Card content</Card>
-          </Col>
-        </Row>
+        <Row gutter={[16, 16]} >{renderHandbook}</Row>
       </div>
       <div className={style.load_more}>
-        <div className={style.load_more_btn}>
+        <div className={style.load_more_btn} onClick={() => loadMore()}>
           <span>查看更多</span>
         </div>
       </div>

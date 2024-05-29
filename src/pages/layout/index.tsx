@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router-dom'
 import style from './index.module.scss'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Affix } from 'antd'
 import { useLocation } from 'react-router-dom'
 
@@ -30,7 +30,12 @@ const Layout = () => {
 
   const changeActive = (param: number) => {
     setIsActive(param)
+    localStorage.setItem('roco_layout_act',param.toString())
   }
+
+  useEffect(() => {
+    setIsActive(Number(localStorage.getItem('roco_layout_act') ?? -1))
+  }, [])
 
   const location = useLocation()
   console.log(location.pathname)
