@@ -1,0 +1,23 @@
+.container {
+  padding: 1.3rem 2rem;
+  text-align: center;
+  // display: flex;
+  // justify-content: center;
+  // &_back {
+
+  // }
+  &_info {
+    width: 86%;
+    display: flex;
+    justify-content: space-between;
+    &_img {
+      margin-right: 1.3rem;
+    }
+    &_desc {
+      font-size: 1.8rem;
+    }
+  }
+  &_racial {
+    margin-top: 1.3rem;
+  }
+}

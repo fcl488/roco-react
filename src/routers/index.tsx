@@ -39,6 +39,13 @@ const router_item = [
         label: 'handbook',
         element: lazyLoad(lazy(() => delayForDemo(import('@/pages/handbook')))),
       },
+      {
+        path: 'handbookInfo',
+        label: 'handbookInfo',
+        element: lazyLoad(
+          lazy(() => delayForDemo(import('@/pages/handbookInfo')))
+        ),
+      },
     ],
   },
   { path: '/404', label: '404', element: <NotFound /> },
