@@ -1,7 +1,6 @@
 import axios from 'axios'
-import { useSelector } from 'react-redux'
 import { message } from 'antd'
-
+import store from '@/store'
 
 const request = axios.create({
   baseURL: '/api',
@@ -11,9 +10,10 @@ const request = axios.create({
   },
 })
 
+
 request.interceptors.request.use(
   (config) => {
-    config.headers['Authorization'] = useSelector((state:any) => state.user.token)
+    config.headers['token'] = store.getState().user.userInfo ? store.getState().user.userInfo : ''
     return config
   },
   (error) => {
@@ -23,12 +23,19 @@ request.interceptors.request.use(
 )
 
 request.interceptors.response.use(
-  (res) => {
-    console.log(res)
-    if(res.data.code === 0) {
-      message.error(res.data.message)
+  (response) => {
+    console.log(response)
+    let res = response.data
+    if (res.code === 0) {
+        return response.data
+    } else if (res.code === 40000 || res.code === 40100 || res.code === 40101 || res.code === 40400 || res.code === 50000) {
+        // 40100 如果未登录跳转到登录页面
+
+        message.error(res.message)
+        return Promise.reject(new Error(res.message))
+    } else {
+        return response.data
     }
-    return res.data
   },
   (error) => {
     console.log(error)

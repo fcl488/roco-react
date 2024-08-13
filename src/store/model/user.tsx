@@ -4,7 +4,7 @@ import { getToken, setToken } from '@/utils/token'
 const user = createSlice({
   name: 'user',
   initialState: () => {
-    const token = getToken() || null
+    const token:string = getToken() || ''
     return {
       token,
       userInfo: {

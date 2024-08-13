@@ -1,6 +1,8 @@
 import style from './index.module.scss'
 import { Image, Descriptions, Table } from 'antd'
 import type { DescriptionsProps } from 'antd'
+import { LeftOutlined } from '@ant-design/icons'
+import { useSearchParams, useNavigate } from 'react-router-dom'
 
 const items: DescriptionsProps['items'] = [
   {
@@ -65,7 +67,7 @@ const items: DescriptionsProps['items'] = [
   },
 ]
 
-const columns = [
+const abilityColumns = [
   {
     title: '血量',
     dataIndex: 'hp',
@@ -98,7 +100,47 @@ const columns = [
   },
 ]
 
-const dataSource = [
+const skillColunms = [
+  {
+    title: '学习等级',
+    dataIndex: 'learnLevel',
+    render: (learnLevel: number) => (learnLevel === 0 ? '-' : learnLevel),
+    key: 'learnLevel',
+  },
+  {
+    title: '技能名称',
+    dataIndex: 'skillName',
+    key: 'skillName',
+  },
+  {
+    title: '技能属性',
+    dataIndex: 'skillType',
+    key: 'skillType',
+  },
+  {
+    title: '技能类别',
+    dataIndex: 'skillCategory',
+    key: 'skillCategory',
+  },
+  {
+    title: '技能威力',
+    dataIndex: 'skillPower',
+    render: (skillPower: number) => (skillPower === 0 ? '-' : skillPower),
+    key: 'skillPower',
+  },
+  {
+    title: '技能描述',
+    dataIndex: 'skillDesc',
+    key: 'skillDesc',
+  },
+  {
+    title: 'pp',
+    dataIndex: 'pp',
+    key: 'pp',
+  },
+]
+
+const abilityDataSource = [
   {
     key: '1',
     hp: '100',
@@ -110,11 +152,35 @@ const dataSource = [
   },
 ]
 
+const skillDataSource = [
+  {
+    learnLevel: 0,
+    skillName: '猛烈撞击',
+    skillCategory: '物理',
+    skillType: '普通',
+    skillPower: 35,
+    skillDesc: '全力撞击对手saffds发顺丰我是法师打发士大夫色都分给色',
+    pp: 35,
+  },
+]
+
 const HandbookInfo = () => {
+  const [searchParams] = useSearchParams()
+  const navigate = useNavigate()
+
+  const spriteId = searchParams.get('spriteId')
+
+  const goBack = () => {
+    navigate('/layout/handbook', { replace: false })
+  }
   return (
     <>
       <div className={style.container}>
-        <div className={style.container_back}></div>
+        <div className={style.container_back}>
+          <div className={style.container_back_box} onClick={() => goBack()}>
+            <LeftOutlined /> 返回
+          </div>
+        </div>
         <div className={style.container_info}>
           <div className={style.container_info_img}>
             <Image
@@ -127,10 +193,41 @@ const HandbookInfo = () => {
           </div>
         </div>
         <div className={style.container_racial}>
-          <Table dataSource={dataSource} columns={columns} pagination={false} />
+          <Table
+            dataSource={abilityDataSource}
+            columns={abilityColumns}
+            pagination={false}
+          />
         </div>
-        <div className={style.container_evolution_chain}></div>
-        <div className={style.container_skill}></div>
+        <div className={style.container_evolution_chain}>
+          <div className={style.container_evolution_chain_item}>
+            <Image
+              preview={false}
+              width={200}
+              src='https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png'
+            />
+          </div>
+          <div className={style.container_evolution_chain_item}>
+            <Image
+              preview={false}
+              width={90}
+              src='https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png'
+            />
+            <Image
+              preview={false}
+              width={90}
+              src='https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png'
+            />
+          </div>
+        </div>
+        <div className={style.container_skill}>
+          <Table
+            rowKey={(record) => record.skillName}
+            pagination={false}
+            columns={skillColunms}
+            dataSource={skillDataSource}
+          />
+        </div>
       </div>
     </>
   )

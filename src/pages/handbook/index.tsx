@@ -3,12 +3,11 @@ import { useState } from 'react'
 import { Input } from 'antd'
 import { Select } from 'antd'
 import { Card, Col, Row, Image } from 'antd'
-const { Search } = Input
+import { useNavigate } from 'react-router-dom'
 import Type from '@/compoments/type'
 
-const handleChange = (value: string) => {
-  console.log(`selected ${value}`)
-}
+const { Search } = Input
+
 
 interface handbook {
   id: string
@@ -23,6 +22,9 @@ interface type {
 }
 
 const Handbook = () => {
+  const handleChange = (value: string) => {
+    console.log(`selected ${value}`)
+  }
   const [handbookList, setHandbookList] = useState<handbook[]>([
     {
       id: '0001',
@@ -57,7 +59,7 @@ const Handbook = () => {
       ],
     },
   ])
-
+  const navigate = useNavigate()
   const loadMore = () => {
     const t: handbook[] = [
       {
@@ -80,10 +82,18 @@ const Handbook = () => {
     setHandbookList([...handbookList, ...t])
   }
 
+  const toInfoPage = (spriteId: string) => {
+    navigate('/layout/handbookInfo?spriteId=' + Number(spriteId), { replace: false })
+  }
+
   const renderHandbook = handbookList.map((item) => {
     return (
       <Col span={6} key={item.id}>
-        <Card hoverable className={style.handbook_list_card}>
+        <Card
+          hoverable
+          className={style.handbook_list_card}
+          onClick={() => toInfoPage(item.id)}
+        >
           <div className={style.handbook_list_card_img}>
             <Image width={200} preview={false} src={item.imgUrl} />
           </div>
@@ -91,7 +101,9 @@ const Handbook = () => {
           <div className={style.handbook_list_card_name}>{item.name}</div>
           <div className='type' style={{ display: 'flex' }}>
             {item.types.map((el) => {
-              return <Type key={el.type} typeStr={el.type} name={el.name}></Type>
+              return (
+                <Type key={el.type} typeStr={el.type} name={el.name}></Type>
+              )
             })}
           </div>
         </Card>
@@ -135,7 +147,7 @@ const Handbook = () => {
         />
       </div>
       <div className={style.handbook_list}>
-        <Row gutter={[16, 16]} >{renderHandbook}</Row>
+        <Row gutter={[16, 16]}>{renderHandbook}</Row>
       </div>
       <div className={style.load_more}>
         <div className={style.load_more_btn} onClick={() => loadMore()}>

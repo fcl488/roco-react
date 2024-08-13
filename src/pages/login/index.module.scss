@@ -1,0 +1,16 @@
+.container {
+  display: flex;
+  justify-content: center;
+  background-color: #f3fafd;
+  height: 100vh;
+  .login_area {
+    margin-top: 10%;
+    .login_btn {
+      width: 100%;
+    }
+    .tips {
+      display: flex;
+      justify-content: center;
+    }
+  }
+}
