@@ -16,7 +16,8 @@
 
   &_list {
     display: flex;
-
+    flex-wrap: wrap;
+    justify-content: space-between;
     &_type {
       width: 10%;
       margin: 0 1.65% 0.5em;
@@ -26,10 +27,29 @@
       border: 1px solid #000;
       display: block;
 
+      &_all {
+        color: #333333;
+        border-color: #333333;
+        // font-size: 1.4rem;
+        &_active {
+          background-color: #333333;
+          color: #fff;
+        }
+        &:hover {
+          cursor: pointer;
+          background-color: #333333;
+          color: #fff;
+        }
+      }
+
       &_normal {
         color: #a0a0a0;
         border-color: #a0a0a0;
         // font-size: 1.4rem;
+        &_active {
+          background-color: #a0a0a0;
+          color: #fff;
+        }
         &:hover {
           cursor: pointer;
           background-color: #a0a0a0;
@@ -40,6 +60,281 @@
       &_fire {
         color: #ff6900;
         border-color: #ff6900;
+        &_active {
+          background-color: #ff6900;
+          color: #fff;
+        }
+        &:hover {
+          cursor: pointer;
+          background-color: #ff6900;
+          color: #fff;
+        }
+      }
+
+      &_grass {
+        color: #b4f000;
+        border-color: #b4f000;
+        &_active {
+          background-color: #b4f000;
+          color: #fff;
+        }
+        &:hover {
+          cursor: pointer;
+          background-color: #b4f000;
+          color: #fff;
+        }
+      }
+
+      &_poison {
+        color: #d28cd2;
+        border-color: #d28cd2;
+        &_active {
+          background-color: #d28cd2;
+          color: #fff;
+        }
+        &:hover {
+          cursor: pointer;
+          background-color: #d28cd2;
+          color: #fff;
+        }
+      }
+
+      &_flying {
+        color: #78dcff;
+        border-color: #78dcff;
+        &_active {
+          background-color: #78dcff;
+          color: #fff;
+        }
+        &:hover {
+          cursor: pointer;
+          background-color: #78dcff;
+          color: #fff;
+        }
+      }
+
+      &_water {
+        color: #14b9ff;
+        border-color: #14b9ff;
+        &_active {
+          background-color: #14b9ff;
+          color: #fff;
+        }
+        &:hover {
+          cursor: pointer;
+          background-color: #14b9ff;
+          color: #fff;
+        }
+      }
+
+      &_bug {
+        color: #46c846;
+        border-color: #46c846;
+        &_active {
+          background-color: #46c846;
+          color: #fff;
+        }
+        &:hover {
+          cursor: pointer;
+          background-color: #46c846;
+          color: #fff;
+        }
+      }
+
+      &_dark {
+        color: #787878;
+        border-color: #787878;
+        &_active {
+          background-color: #787878;
+          color: #fff;
+        }
+        &:hover {
+          cursor: pointer;
+          background-color: #787878;
+          color: #fff;
+        }
+      }
+
+      &_electric {
+        color: #ffe100;
+        border-color: #ffe100;
+        &_active {
+          background-color: #ffe100;
+          color: #fff;
+        }
+        &:hover {
+          cursor: pointer;
+          background-color: #ffe100;
+          color: #fff;
+        }
+      }
+
+      &_psychic {
+        color: #f08cdc;
+        border-color: #f08cdc;
+        &_active {
+          background-color: #f08cdc;
+          color: #fff;
+        }
+        &:hover {
+          cursor: pointer;
+          background-color: #f08cdc;
+          color: #fff;
+        }
+      }
+
+      &_ground {
+        color: #fac85a;
+        border-color: #fac85a;
+        &_active {
+          background-color: #fac85a;
+          color: #fff;
+        }
+        &:hover {
+          cursor: pointer;
+          background-color: #fac85a;
+          color: #fff;
+        }
+      }
+
+      &_ice {
+        color: #14f5ff;
+        border-color: #14f5ff;
+        &_active {
+          background-color: #14f5ff;
+          color: #fff;
+        }
+        &:hover {
+          cursor: pointer;
+          background-color: #14f5ff;
+          color: #fff;
+        }
+      }
+
+      &_steel {
+        color: #aac8f0;
+        border-color: #aac8f0;
+        &_active {
+          background-color: #aac8f0;
+          color: #fff;
+        }
+        &:hover {
+          cursor: pointer;
+          background-color: #aac8f0;
+          color: #fff;
+        }
+      }
+
+      &_fighting {
+        color: #dc6900;
+        border-color: #dc6900;
+        &_active {
+          background-color: #dc6900;
+          color: #fff;
+        }
+        &:hover {
+          cursor: pointer;
+          background-color: #dc6900;
+          color: #fff;
+        }
+      }
+
+      &_rock {
+        color: #b48c64;
+        border-color: #b48c64;
+        &_active {
+          background-color: #b48c64;
+          color: #fff;
+        }
+        &:hover {
+          cursor: pointer;
+          background-color: #b48c64;
+          color: #fff;
+        }
+      }
+
+      &_ghost {
+        color: #a08cff;
+        border-color: #a08cff;
+        &_active {
+          background-color: #a08cff;
+          color: #fff;
+        }
+        &:hover {
+          cursor: pointer;
+          background-color: #a08cff;
+          color: #fff;
+        }
+      }
+
+      &_dragon {
+        color: #5078dc;
+        border-color: #5078dc;
+        &_active {
+          background-color: #5078dc;
+          color: #fff;
+        }
+        &:hover {
+          cursor: pointer;
+          background-color: #5078dc;
+          color: #fff;
+        }
+      }
+
+      &_lighting {
+        color: #ffee00;
+        border-color: #fffb01;
+        &_active {
+          background-color: #fffb01;
+          color: #fff;
+        }
+        &:hover {
+          cursor: pointer;
+          background-color: #fffb01;
+          color: #fff;
+        }
+      }
+
+      &_super_fire {
+        color: #ff4800;
+        border-color: #ff4800;
+        &_active {
+          background-color: #ff4800;
+          color: #fff;
+        }
+        &:hover {
+          cursor: pointer;
+          background-color: #ff4800;
+          color: #fff;
+        }
+      }
+
+      &_super_grass {
+        color: #09ff00;
+        border-color: #09ff00;
+        &_active {
+          background-color: #09ff00;
+          color: #fff;
+        }
+        &:hover {
+          cursor: pointer;
+          background-color: #09ff00;
+          color: #fff;
+        }
+      }
+
+      &_super_water {
+        color: #0077ff;
+        border-color: #0077ff;
+        &_active {
+          background-color: #0077ff;
+          color: #fff;
+        }
+        &:hover {
+          cursor: pointer;
+          background-color: #0077ff;
+          color: #fff;
+        }
       }
     }
   }
@@ -81,6 +376,11 @@
     background-color: #73daff;
     padding: 0.4rem 0;
     border-radius: 2rem;
+    &_finish {
+      background-color: #fff;
+      color: #73daff;
+      border: 1px solid #73daff;
+    }
     &:hover {
       cursor: pointer;
       background-color: #fff;

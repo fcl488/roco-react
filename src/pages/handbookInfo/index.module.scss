@@ -1,0 +1,45 @@
+.container {
+  padding: 0 2rem 1.3rem 2rem;
+  text-align: center;
+  // display: flex;
+  // justify-content: center;
+  &_back {
+    display: flex;
+    margin-bottom: 1rem;
+    &_box {
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+  &_info {
+    width: 86%;
+    display: flex;
+    justify-content: space-between;
+    &_img {
+      margin-right: 1.3rem;
+    }
+    &_desc {
+      font-size: 1.8rem;
+    }
+  }
+  &_racial {
+    margin-top: 1.3rem;
+  }
+  &_evolution {
+    &_chain {
+      display: flex;
+      justify-content: center;
+      margin-top: 1rem;
+      &_item {
+        margin-right: 8rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+    }
+  }
+  &_skill {
+    margin-top: 1rem;
+  }
+}

@@ -4,12 +4,13 @@ import { getToken, setToken } from '@/utils/token'
 const user = createSlice({
   name: 'user',
   initialState: () => {
-    const token = getToken() || null
+    let token:string = getToken() || ''
+    let userInfo = {
+      account: ''
+    }
     return {
       token,
-      userInfo: {
-        username: '',
-      },
+      userInfo,
     }
   },
   reducers: {
@@ -20,6 +21,7 @@ const user = createSlice({
     setTokenInfo(state, action) {
       const { payload } = action
       state.token = payload
+      console.log(payload)
       setToken(payload)
     }
   },

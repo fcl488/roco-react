@@ -4,6 +4,7 @@ import lazyLoad from './lazyLoad'
 import Layout from '@/pages/layout'
 import Login from '@/pages/login'
 import NotFound from '@/pages/404/inedx'
+import Register from '@/pages/register'
 
 function delayForDemo(promise: Promise<any>) {
   return new Promise((resolve) => {
@@ -14,6 +15,7 @@ function delayForDemo(promise: Promise<any>) {
 const router_item = [
   { path: '/', label: '首页', element: <Navigate to='/layout/home' /> },
   { path: '/login', label: 'login', element: <Login /> },
+  { path: '/register', label: 'register', element: <Register /> },
   {
     path: '/layout',
     label: 'layout',
@@ -38,6 +40,13 @@ const router_item = [
         path: 'handbook',
         label: 'handbook',
         element: lazyLoad(lazy(() => delayForDemo(import('@/pages/handbook')))),
+      },
+      {
+        path: 'handbookInfo',
+        label: 'handbookInfo',
+        element: lazyLoad(
+          lazy(() => delayForDemo(import('@/pages/handbookInfo')))
+        ),
       },
     ],
   },

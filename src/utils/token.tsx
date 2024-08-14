@@ -1,7 +1,7 @@
 const key = 'ROCO_REACT'
 
-export const getToken = () => {
-  return localStorage.getItem(key)
+export const getToken = (): string => {
+  return localStorage.getItem(key) ? localStorage.getItem(key) as string : ''
 }
 
 export const setToken = (token: string) => {
