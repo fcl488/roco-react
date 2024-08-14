@@ -4,24 +4,27 @@ import type { LoginDTO } from '@/api/user/type'
 import { useEffect, useState } from 'react'
 import userApi from '@/api/user/index'
 import rsaUtil from '@/utils/rsaUtil'
-import { useSelector,useDispatch } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import { setTokenInfo } from '@/store/model/user'
 
 const Login = () => {
   const [publicKey, setPublicKey] = useState<string>('')
   const [messageApi, contextHolder] = message.useMessage()
-  const user = useSelector((store:any) => store.user)
+  const user = useSelector((store: any) => store.user)
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  
+
   const onFinish = (values: LoginDTO) => {
     try {
       values.password = rsaUtil.encode(values.password as string, publicKey)
       userApi.login(values).then(res => {
-        dispatch({
-          payload: res.data,
-          type: 'setTokenInfo'
-        })
+        // console.log(res.data.token)
+        dispatch(setTokenInfo(res.data.token))
+        // store.dispatch({
+        //   payload: res.data.token,
+        //   type: 'setTokenInfo'
+        // })
         navigate('/layout/handbook', { replace: false })
       })
     } catch (error) {
@@ -40,7 +43,6 @@ const Login = () => {
       setPublicKey(res.data)
     }
     getPublicKey()
-    
   }, [])
 
   return (

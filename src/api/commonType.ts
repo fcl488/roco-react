@@ -13,6 +13,4 @@ export type PageVO = {
   total: string
 }
 
-export type CommonRes = BaseResult<any> & {
-  data: any
-}
+export type CommonRes = BaseResult<any>

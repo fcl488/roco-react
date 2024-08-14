@@ -13,7 +13,7 @@ const request = axios.create({
 
 request.interceptors.request.use(
   (config) => {
-    config.headers['token'] = store.getState().user.userInfo ? store.getState().user.userInfo : ''
+    config.headers['token'] = store.getState().user.token ? store.getState().user.token : ''
     return config
   },
   (error) => {
@@ -39,6 +39,7 @@ request.interceptors.response.use(
   },
   (error) => {
     console.log(error)
+    message.error(error.message)
     return Promise.reject(error)
   }
 )

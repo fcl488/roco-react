@@ -1,6 +1,6 @@
 import request from '@/utils/request'
 import type { BaseResult } from '../commonType'
-import type { LoginDTO } from './type'
+import type { LoginDTO, LoginVO } from './type'
 
 enum API {
   GET_PUBLIC_KEY = '/user/get/publickey',
@@ -12,6 +12,6 @@ export default {
     return request.get<any, BaseResult<string>>(API.GET_PUBLIC_KEY)
   },
   login(params: LoginDTO) {
-    return request.post<any, BaseResult<string>>(API.LOGIN, params)
+    return request.post<any, BaseResult<LoginVO>>(API.LOGIN, params)
   }
 }
