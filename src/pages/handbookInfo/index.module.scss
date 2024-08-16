@@ -21,6 +21,14 @@
     }
     &_desc {
       font-size: 1.8rem;
+      &_box {
+        width: 40rem;
+        display: flex;
+        flex-wrap: wrap;
+        &_item {
+          margin: 1rem;
+        }
+      }
     }
   }
   &_racial {

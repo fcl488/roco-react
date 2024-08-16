@@ -24,17 +24,16 @@ request.interceptors.request.use(
 
 request.interceptors.response.use(
   (response) => {
-    console.log(response)
     let res = response.data
     if (res.code === 0) {
-        return response.data
+        return res
     } else if (res.code === 40000 || res.code === 40100 || res.code === 40101 || res.code === 40400 || res.code === 50000) {
         // 40100 如果未登录跳转到登录页面
 
         message.error(res.message)
         return Promise.reject(new Error(res.message))
     } else {
-        return response.data
+        return res
     }
   },
   (error) => {

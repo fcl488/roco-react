@@ -1,71 +1,17 @@
 import style from './index.module.scss'
-import { Image, Descriptions, Table } from 'antd'
+import { Image, Descriptions, Table, Tooltip, Empty } from 'antd'
 import type { DescriptionsProps } from 'antd'
 import { LeftOutlined } from '@ant-design/icons'
 import { useSearchParams, useNavigate } from 'react-router-dom'
-
-const items: DescriptionsProps['items'] = [
-  {
-    key: '1',
-    label: '编号',
-    children: '0001',
-  },
-  {
-    key: '2',
-    label: '精灵名称',
-    children: '妙蛙种子',
-  },
-  {
-    key: '3',
-    label: '属性',
-    children: '主属性：草   副属性：毒',
-  },
-  {
-    key: '4',
-    label: '组别',
-    children: '植物组',
-  },
-  {
-    key: '5',
-    label: '血脉',
-    children: '深绿',
-  },
-  {
-    key: '6',
-    label: '身高',
-    children: '1.3m',
-  },
-  {
-    key: '7',
-    label: '体重',
-    children: '3kg',
-  },
-  {
-    key: '8',
-    label: '颜色',
-    children: '深绿',
-  },
-  {
-    key: '9',
-    label: '经验类型',
-    children: '100',
-  },
-  {
-    key: '10',
-    label: '爱好',
-    children: '100',
-  },
-  {
-    key: '11',
-    label: '简介',
-    children: '100',
-  },
-  {
-    key: '12',
-    label: '获取方式',
-    children: '100',
-  },
-]
+import { useEffect, useState } from 'react'
+import spriteApi from '@/api/sprite/index'
+import type {
+  SpriteInfo,
+  SkillInfo,
+  SpriteEvolutionList,
+  SpriteEvolution,
+} from '@/api/sprite/type'
+import type { IdDTO } from '@/api/commonType'
 
 const abilityColumns = [
   {
@@ -140,39 +86,176 @@ const skillColunms = [
   },
 ]
 
-const abilityDataSource = [
-  {
-    key: '1',
-    hp: '100',
-    attack: '100',
-    defense: '100',
-    special_attack: '100',
-    special_defense: '100',
-    speed: '100',
-  },
-]
-
-const skillDataSource = [
-  {
-    learnLevel: 0,
-    skillName: '猛烈撞击',
-    skillCategory: '物理',
-    skillType: '普通',
-    skillPower: 35,
-    skillDesc: '全力撞击对手saffds发顺丰我是法师打发士大夫色都分给色',
-    pp: 35,
-  },
-]
+type SpriteAbilityType = {
+  hp: number
+  attack: number
+  defense: number
+  special_attack: number
+  special_defense: number
+  speed: number
+  key: string
+}
 
 const HandbookInfo = () => {
   const [searchParams] = useSearchParams()
+  const [spriteInfo, setSpriteInfo] = useState<SpriteInfo>()
+  const [descItems, setDescItems] = useState<DescriptionsProps['items']>([])
+  const [spriteAbility, setSpriteAbility] = useState<SpriteAbilityType[]>([
+    {
+      hp: 0,
+      attack: 0,
+      defense: 0,
+      special_attack: 0,
+      special_defense: 0,
+      speed: 0,
+      key: '1',
+    },
+  ])
+  const [skillList, setSkillList] = useState<SkillInfo[]>([])
+  const [evolutionList, setEvolutionList] = useState<SpriteEvolution[][]>()
   const navigate = useNavigate()
-
-  const spriteId = searchParams.get('spriteId')
+  let params: IdDTO = {
+    id: Number(searchParams.get('spriteId')),
+  }
+  useEffect(() => {
+    const getSpriteInfo = async () => {
+      const res = await spriteApi.getSpriteInfo(params)
+      setSpriteInfo(res.data)
+      let items: DescriptionsProps['items'] = []
+      items.push({
+        label: '编号',
+        children: res.data.id,
+      })
+      items.push({
+        label: '精灵名称',
+        children: res.data.spriteName,
+      })
+      items.push({
+        label: '属性',
+        children: res.data.mainType,
+      })
+      if ('' !== res.data.subtype) {
+        items.push({
+          label: '副属性',
+          children: res.data.subtype,
+        })
+      }
+      items.push({
+        label: '组别',
+        children: res.data.groupType,
+      })
+      if (res.data.bloodList.length === 1) {
+        items.push({
+          label: '第一血脉',
+          children: (
+            <Tooltip title={res.data.bloodList[0].bloodDesc}>
+              <span>{res.data.bloodList[0].bloodName}</span>
+            </Tooltip>
+          ),
+        })
+      }
+      if (res.data.bloodList.length === 2) {
+        items.push({
+          label: '第一血脉',
+          children: (
+            <Tooltip title={res.data.bloodList[0].bloodDesc}>
+              <span>{res.data.bloodList[0].bloodName}</span>
+            </Tooltip>
+          ),
+        })
+        items.push({
+          label: '第二血脉',
+          children: (
+            <Tooltip title={res.data.bloodList[1].bloodDesc}>
+              <span>{res.data.bloodList[1].bloodName}</span>
+            </Tooltip>
+          ),
+        })
+      }
+      items.push({
+        label: '身高',
+        children: res.data.height,
+      })
+      items.push({
+        label: '体重',
+        children: res.data.weight,
+      })
+      items.push({
+        label: '颜色',
+        children: res.data.spriteColor,
+      })
+      items.push({
+        label: '经验类型',
+        children: res.data.expType,
+      })
+      items.push({
+        label: '爱好',
+        children: res.data.spriteHobby,
+      })
+      items.push({
+        label: '简介',
+        children: res.data.spriteDescription,
+      })
+      items.push({
+        label: '获取方式',
+        children: res.data.spriteGetWay,
+      })
+      setDescItems(items)
+      setSpriteAbility([
+        {
+          hp: res.data.hp,
+          attack: res.data.atk,
+          defense: res.data.def,
+          special_attack: res.data.spAtk,
+          special_defense: res.data.spDef,
+          speed: res.data.speed,
+          key: '1',
+        },
+      ])
+    }
+    const getSkillInfo = async () => {
+      let res = await spriteApi.getSkillInfo(params)
+      setSkillList(res.data)
+    }
+    const getEvolutionList = async () => {
+      let res = await spriteApi.GetSpriteEvolutionList(params)
+      setEvolutionList(res.data)
+    }
+    getSpriteInfo()
+    getSkillInfo()
+    getEvolutionList()
+  }, [])
 
   const goBack = () => {
     navigate('/layout/handbook', { replace: false })
   }
+
+  const renderEvolutionList = evolutionList?.map((item, index) => {
+    return (
+      <div key={index} className={style.container_evolution_chain_item}>
+        {item.map((el) => {
+          return (
+            <Image
+              key={el.spriteId}
+              preview={false}
+              width={200}
+              src={el.spriteImg}
+            />
+          )
+        })}
+      </div>
+    )
+  })
+
+  const RenderEvolutionListArea: () => JSX.Element = () => {
+    if (evolutionList && evolutionList.length > 0) {
+      {
+        renderEvolutionList
+      }
+    }
+    return <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description="暂无进化链信息" />
+  }
+
   return (
     <>
       <div className={style.container}>
@@ -183,24 +266,25 @@ const HandbookInfo = () => {
         </div>
         <div className={style.container_info}>
           <div className={style.container_info_img}>
-            <Image
-              width={500}
-              src='https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png'
-            />
+            <Image width={500} src={spriteInfo?.spriteImg} />
           </div>
           <div className={style.container_info_desc}>
-            <Descriptions items={items} />
+            <Descriptions
+              items={descItems}
+              labelStyle={{ fontSize: '1.3rem' }}
+              contentStyle={{ fontSize: '1.3rem' }}
+            />
           </div>
         </div>
         <div className={style.container_racial}>
           <Table
-            dataSource={abilityDataSource}
+            dataSource={spriteAbility}
             columns={abilityColumns}
             pagination={false}
           />
         </div>
         <div className={style.container_evolution_chain}>
-          <div className={style.container_evolution_chain_item}>
+          {/* <div className={style.container_evolution_chain_item}>
             <Image
               preview={false}
               width={200}
@@ -218,14 +302,15 @@ const HandbookInfo = () => {
               width={90}
               src='https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png'
             />
-          </div>
+          </div> */}
+          <RenderEvolutionListArea />
         </div>
         <div className={style.container_skill}>
           <Table
             rowKey={(record) => record.skillName}
             pagination={false}
             columns={skillColunms}
-            dataSource={skillDataSource}
+            dataSource={skillList}
           />
         </div>
       </div>

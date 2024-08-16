@@ -33,7 +33,7 @@ const Handbook = () => {
   const querySprite = async () => {
     const dto: QuerySpriteDTO = {
       page: currentPage,
-      limit: 2,
+      limit: 30,
       keyword: queryKeyword,
       sort: sortFlag,
       type: typeActive,
@@ -76,6 +76,8 @@ const Handbook = () => {
       return
     }
     setQueryKeyword(value)
+    setTypeActive(0)
+    setSprietList([])
     setCurrnetPage(1)
   }
 
