@@ -112,7 +112,7 @@ const HandbookInfo = () => {
     },
   ])
   const [skillList, setSkillList] = useState<SkillInfo[]>([])
-  const [evolutionList, setEvolutionList] = useState<SpriteEvolution[][]>()
+  const [evolutionList, setEvolutionList] = useState<SpriteEvolution[][]>([[]])
   const navigate = useNavigate()
   let params: IdDTO = {
     id: Number(searchParams.get('spriteId')),
@@ -230,17 +230,19 @@ const HandbookInfo = () => {
     navigate('/layout/handbook', { replace: false })
   }
 
-  const renderEvolutionList = evolutionList?.map((item, index) => {
+  const renderEvolutionList = evolutionList.map((item, index) => {
     return (
       <div key={index} className={style.container_evolution_chain_item}>
         {item.map((el) => {
           return (
-            <Image
-              key={el.spriteId}
-              preview={false}
-              width={200}
-              src={el.spriteImg}
-            />
+            <>
+              <Image
+                key={el.spriteId}
+                preview={false}
+                width={200}
+                src={el.spriteImg}
+              />
+            </>
           )
         })}
       </div>
@@ -249,11 +251,14 @@ const HandbookInfo = () => {
 
   const RenderEvolutionListArea: () => JSX.Element = () => {
     if (evolutionList && evolutionList.length > 0) {
-      {
-        renderEvolutionList
-      }
+      return <>{renderEvolutionList}</>
     }
-    return <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description="暂无进化链信息" />
+    return (
+      <Empty
+        image={Empty.PRESENTED_IMAGE_SIMPLE}
+        description='暂无进化链信息'
+      />
+    )
   }
 
   return (

@@ -1,8 +1,10 @@
 import { Outlet } from 'react-router-dom'
 import style from './index.module.scss'
 import { useState, useEffect } from 'react'
-import { Affix } from 'antd'
+import { Affix, Dropdown, Avatar } from 'antd'
 import { useLocation } from 'react-router-dom'
+import type { MenuProps } from 'antd'
+import { UserOutlined } from '@ant-design/icons'
 
 const styles = {
   nav_item_notice_active: {
@@ -30,7 +32,7 @@ const Layout = () => {
 
   const changeActive = (param: number) => {
     setIsActive(param)
-    localStorage.setItem('roco_layout_act',param.toString())
+    localStorage.setItem('roco_layout_act', param.toString())
   }
 
   useEffect(() => {
@@ -39,6 +41,21 @@ const Layout = () => {
 
   const location = useLocation()
   console.log(location.pathname)
+
+  const items: MenuProps['items'] = [
+    {
+      label: '个人信息',
+      key: '0',
+    },
+    {
+      label: '退出登录',
+      key: '1',
+    },
+  ]
+
+  const handleMenu = (e: React.MouseEvent<HTMLButtonElement>) => {
+    console.log(e)
+  }
 
   return (
     <>
@@ -101,6 +118,14 @@ const Layout = () => {
                   </li>
                 </ul>
               </div>
+            </div>
+            <div>
+              {/* <Dropdown menu={{ items }}>
+                <a onClick={handleMenu}>
+                  
+                </a>
+              </Dropdown> */}
+              <Avatar size={64} icon={<UserOutlined />} />
             </div>
           </div>
         </div>

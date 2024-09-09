@@ -98,6 +98,18 @@ const Handbook = () => {
     )
   })
 
+  const handleSpriteId = (id: number):string => {
+    if(id < 10) {
+      return '000' + id
+    }else if (id < 100) {
+      return '00' + id
+    }else if (id < 1000) {
+      return '0' + id
+    }else {
+      return '' + id
+    }
+  }
+
   const renderHandbook = spriteList.map((item) => {
     return (
       <Col span={6} key={item.id}>
@@ -109,7 +121,7 @@ const Handbook = () => {
           <div className={style.handbook_list_card_img}>
             <Image width={200} preview={false} src={item.imgUrl} />
           </div>
-          <div className={style.handbook_list_card_number}>{item.id}</div>
+          <div className={style.handbook_list_card_number}>{handleSpriteId(item.id)}</div>
           <div className={style.handbook_list_card_name}>{item.spriteName}</div>
           <div className='type' style={{ display: 'flex' }}>
             {item.types.map((el) => {

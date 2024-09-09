@@ -25,7 +25,8 @@ const Login = () => {
         //   payload: res.data.token,
         //   type: 'setTokenInfo'
         // })
-        navigate('/layout/handbook', { replace: false })
+        localStorage.removeItem('roco_layout_act')
+        navigate('/layout/home', { replace: false })
       })
     } catch (error) {
       messageApi.error('login failed')
