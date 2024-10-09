@@ -1,0 +1,31 @@
+.ant-carousel .slick-prev,
+.ant-carousel .slick-next,
+.ant-carousel .slick-prev:hover,
+.ant-carousel .slick-next:hover {
+  font-size: inherit;
+  color: currentColor;
+}
+
+.banner {
+  height: 460px;
+  display: flex;
+  justify-content: center;
+  &_area {
+    height: 100%;
+    width: 90%;
+  }
+}
+
+.point_color {
+  color: black;
+}
+
+.other {
+  &_title {
+    font-size: 24px;
+    font-weight: bolder;
+  }
+  &_contant {
+    padding: 0 25px;
+  }
+}

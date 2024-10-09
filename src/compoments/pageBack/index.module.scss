@@ -1,0 +1,11 @@
+.container {
+  &_back {
+    display: flex;
+    margin-bottom: 1rem;
+    &_box {
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+}

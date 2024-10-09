@@ -15,7 +15,7 @@ const Handbook = () => {
   const [totalSpriteCount, setTotalSpriteCount] = useState<number>(0)
   const [currentPage, setCurrnetPage] = useState<number>(1)
   const [queryKeyword, setQueryKeyword] = useState<string>('')
-  const [sortFlag, setSortFlag] = useState<number>(0)
+  const [sortFlag, setSortFlag] = useState<number>(1)
 
   useEffect(() => {
     const getAllTypes = async () => {
@@ -169,7 +169,7 @@ const Handbook = () => {
       </div>
       <div className={style.banner}>
         <Select
-          defaultValue={0}
+          defaultValue={1}
           style={{ width: 200, height: 30 }}
           onChange={handleChange}
           options={[

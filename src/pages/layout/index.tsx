@@ -2,9 +2,10 @@ import { Outlet } from 'react-router-dom'
 import style from './index.module.scss'
 import { useState, useEffect } from 'react'
 import { Affix, Dropdown, Avatar } from 'antd'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import type { MenuProps } from 'antd'
 import { UserOutlined } from '@ant-design/icons'
+import { removeToken } from '@/utils/token'
 
 const styles = {
   nav_item_notice_active: {
@@ -35,27 +36,63 @@ const Layout = () => {
     localStorage.setItem('roco_layout_act', param.toString())
   }
 
-  useEffect(() => {
-    setIsActive(Number(localStorage.getItem('roco_layout_act') ?? -1))
-  }, [])
-
   const location = useLocation()
   console.log(location.pathname)
 
+  useEffect(() => {
+    setIsActive(Number(localStorage.getItem('roco_layout_act') ?? -1))
+    if('/layout/home' === location.pathname) {
+      setIsActive(-1)
+    }
+    if('/layout/notice' === location.pathname) {
+      setIsActive(0)
+    }
+    if('/layout/handbook' === location.pathname) {
+      setIsActive(1)
+    }
+    if('/layout/news' === location.pathname) {
+      setIsActive(2)
+    }
+  }, [])
+
+  const navigate = useNavigate()
+
+  const toUserInfoPage = () => {
+    navigate('/layout/userInfo', { replace: false })
+  }
+
+  const logout = () => {
+    removeToken()
+    localStorage.removeItem('roco_layout_act')
+    navigate('/login', { replace: false })
+  }
+
   const items: MenuProps['items'] = [
     {
-      label: '个人信息',
+      label: (
+        <div
+          onClick={() => {
+            toUserInfoPage()
+          }}
+        >
+          个人信息
+        </div>
+      ),
       key: '0',
     },
     {
-      label: '退出登录',
+      label: (
+        <div
+          onClick={() => {
+            logout()
+          }}
+        >
+          退出登录
+        </div>
+      ),
       key: '1',
     },
   ]
-
-  const handleMenu = (e: React.MouseEvent<HTMLButtonElement>) => {
-    console.log(e)
-  }
 
   return (
     <>
@@ -64,7 +101,13 @@ const Layout = () => {
           <div className={style.header_body}>
             <div className={style.header_title}>
               <a href='#/layout/home' onClick={() => changeActive(-1)}>
-                <img src='https://www.pokemon.cn/img/common/logo.png' alt='' />
+                {/* <img src='https://www.pokemon.cn/img/common/logo.png' alt='' /> */}
+                <img
+                  width={130}
+                  height={48}
+                  src='http://ossweb-img.qq.com/images/roco/act/a20110727lkwg/face/1year/9.gif'
+                  alt=''
+                />
               </a>
             </div>
             <div className={style.nav}>
@@ -120,12 +163,11 @@ const Layout = () => {
               </div>
             </div>
             <div>
-              {/* <Dropdown menu={{ items }}>
-                <a onClick={handleMenu}>
-                  
+              <Dropdown menu={{ items }}>
+                <a onClick={(e) => e.preventDefault()}>
+                  <Avatar size={64} icon={<UserOutlined />} />
                 </a>
-              </Dropdown> */}
-              <Avatar size={64} icon={<UserOutlined />} />
+              </Dropdown>
             </div>
           </div>
         </div>
@@ -136,6 +178,11 @@ const Layout = () => {
           <Outlet />
         </div>
       </div>
+      <footer className={style.footer}>
+        <div className={style.content}>
+          本网站纯纯为爱发电，如有版权问题或者其他问题请联系1397697356@qq.com告知。
+        </div>
+      </footer>
     </>
   )
 }

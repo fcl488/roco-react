@@ -8,7 +8,6 @@ import spriteApi from '@/api/sprite/index'
 import type {
   SpriteInfo,
   SkillInfo,
-  SpriteEvolutionList,
   SpriteEvolution,
 } from '@/api/sprite/type'
 import type { IdDTO } from '@/api/commonType'

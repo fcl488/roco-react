@@ -1,0 +1,30 @@
+.container {
+  display: flex;
+  justify-content: center;
+
+  .notice {
+    width: 80%;
+    padding: 5px 16px;
+    .card_area {
+      display: flex;
+      justify-content: space-between;
+
+      .title {
+        font-size: 24px;
+      }
+
+      .other {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        .sub_time {
+          font-size: 16px;
+        }
+      }
+    }
+    .page_area {
+      display: flex;
+      justify-content: flex-end;
+    }
+  }
+}
