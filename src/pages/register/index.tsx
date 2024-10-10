@@ -4,6 +4,7 @@ import userApi from '@/api/user'
 import { GetVerifyCodeDTO, RegisterDTO } from '@/api/user/type'
 import { useState } from 'react'
 import rsaUtil from '@/utils/rsaUtil'
+import { useNavigate } from 'react-router-dom'
 
 type FieldType = {
   account?: string
@@ -15,6 +16,7 @@ type FieldType = {
 const Register = () => {
   const [messageApi, contextHolder] = message.useMessage()
   const [email, setEmail] = useState<string>('')
+  const navigate = useNavigate()
   const onFinish = async (values: FieldType) => {
     const publicKeyRes = await userApi.getPublicKey()
     const dto: RegisterDTO = {
@@ -25,7 +27,11 @@ const Register = () => {
     }
     const res = await userApi.register(dto)
     if (res.code === 0) {
-      messageApi.success('注册成功,请前往登录页面')
+      messageApi.success('注册成功,请前往登录页面').then(() => {
+        navigate('/login', {
+          replace: false,
+        })
+      })
     } else {
       messageApi.error('注册失败,如有问题请联系1397697356@qq.com')
     }

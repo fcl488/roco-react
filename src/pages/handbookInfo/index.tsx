@@ -185,18 +185,22 @@ const HandbookInfo = () => {
       })
       items.push({
         label: '经验类型',
+        span: 3,
         children: res.data.expType,
       })
       items.push({
         label: '爱好',
+        span: 3,
         children: res.data.spriteHobby,
       })
       items.push({
         label: '简介',
+        span: 3,
         children: res.data.spriteDescription,
       })
       items.push({
         label: '获取方式',
+        span: 3,
         children: res.data.spriteGetWay,
       })
       setDescItems(items)
