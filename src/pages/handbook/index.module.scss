@@ -72,15 +72,15 @@
       }
 
       &_grass {
-        color: #b4f000;
-        border-color: #b4f000;
+        color: #46c846;
+        border-color: #46c846;
         &_active {
-          background-color: #b4f000;
+          background-color: #46c846;
           color: #fff;
         }
         &:hover {
           cursor: pointer;
-          background-color: #b4f000;
+          background-color: #46c846;
           color: #fff;
         }
       }
@@ -128,15 +128,15 @@
       }
 
       &_bug {
-        color: #46c846;
-        border-color: #46c846;
+        color: #b4f000;
+        border-color: #b4f000;
         &_active {
-          background-color: #46c846;
+          background-color: #b4f000;
           color: #fff;
         }
         &:hover {
           cursor: pointer;
-          background-color: #46c846;
+          background-color: #b4f000;
           color: #fff;
         }
       }

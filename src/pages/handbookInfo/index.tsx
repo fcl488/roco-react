@@ -280,7 +280,7 @@ const HandbookInfo = () => {
             <Descriptions
               items={descItems}
               labelStyle={{ fontSize: '1.3rem' }}
-              contentStyle={{ fontSize: '1.3rem', justifyContent: 'flex-start' }}
+              contentStyle={{ fontSize: '1.3rem', textAlign: 'start' }}
             />
           </div>
         </div>
