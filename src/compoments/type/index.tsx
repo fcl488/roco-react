@@ -146,22 +146,22 @@ const Type = ({ typeStr, name }: spriteType) => {
       return styles.ground
     }
     if ('ice' === type) {
-      return styles.ground
+      return styles.ice
     }
-    if ('ground' === type) {
-      return styles.ground
+    if ('steel' === type) {
+      return styles.steel
     }
     if ('fighting' === type) {
-      return styles.ground
+      return styles.fighting
     }
     if ('rock' === type) {
-      return styles.ground
+      return styles.rock
     }
     if ('ghost' === type) {
-      return styles.ground
+      return styles.ghost
     }
     if ('dragon' === type) {
-      return styles.ground
+      return styles.dragon
     }
     return undefined
   }
