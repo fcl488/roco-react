@@ -36,7 +36,7 @@ const Handbook = () => {
   const querySprite = async () => {
     const dto: QuerySpriteDTO = {
       page: currentPage,
-      limit: 30,
+      limit: 40,
       keyword: queryKeyword,
       sort: sortFlag,
       type: typeActive,
