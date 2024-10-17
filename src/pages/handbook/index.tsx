@@ -1,14 +1,14 @@
 import style from './index.module.scss'
 import { useState, useEffect } from 'react'
 import { Input, Select, Card, Col, Row, Image, Empty } from 'antd'
-import { useNavigate } from 'react-router-dom'
+// import { useNavigate } from 'react-router-dom'
 import Type from '@/compoments/type'
 import type { SpriteType, QuerySpriteDTO, Sprite } from '@/api/sprite/type'
 import spriteApi from '@/api/sprite/index'
 const { Search } = Input
 
 const Handbook = () => {
-  const navigate = useNavigate()
+  // const navigate = useNavigate()
   const [typeActive, setTypeActive] = useState<number>(0)
   const [typeList, setTypeList] = useState<SpriteType[]>([])
   const [spriteList, setSprietList] = useState<Sprite[]>([])
@@ -16,6 +16,7 @@ const Handbook = () => {
   const [currentPage, setCurrnetPage] = useState<number>(1)
   const [queryKeyword, setQueryKeyword] = useState<string>('')
   const [sortFlag, setSortFlag] = useState<number>(1)
+  const [baseUrl, setBaseUrl] = useState<string>('')
 
   useEffect(() => {
     const getAllTypes = async () => {
@@ -24,6 +25,8 @@ const Handbook = () => {
     }
     getAllTypes()
     querySprite()
+    setBaseUrl(import.meta.env.VITE_TARGET)
+    console.log(import.meta.env.VITE_TARGET)
   }, [])
 
   useEffect(() =>{
@@ -57,9 +60,11 @@ const Handbook = () => {
   }
 
   const toInfoPage = (spriteId: number) => {
-    navigate('/layout/handbookInfo?spriteId=' + spriteId, {
-      replace: false,
-    })
+    // navigate('/layout/handbookInfo?spriteId=' + spriteId, {
+    //   replace: false,
+    // })
+    
+    window.open(baseUrl + '#/layout/handbookInfo?spriteId=' + spriteId, '_black')
   }
 
   const changeType = (typeId: number) => {

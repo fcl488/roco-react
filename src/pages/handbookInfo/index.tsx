@@ -120,10 +120,11 @@ const HandbookInfo = () => {
   const [skillList, setSkillList] = useState<SkillInfo[]>([])
   const [evolutionList, setEvolutionList] = useState<SpriteEvolution[][]>([[]])
   const navigate = useNavigate()
-  let params: IdDTO = {
-    id: Number(searchParams.get('spriteId')),
-  }
+  
   useEffect(() => {
+    let params: IdDTO = {
+      id: Number(searchParams.get('spriteId')),
+    }
     const getSpriteInfo = async () => {
       const res = await spriteApi.getSpriteInfo(params)
       setSpriteInfo(res.data)
@@ -235,7 +236,7 @@ const HandbookInfo = () => {
     getSpriteInfo()
     getSkillInfo()
     getEvolutionList()
-  }, [])
+  }, [searchParams])
 
   const goBack = () => {
     navigate('/layout/handbook', { replace: false })
