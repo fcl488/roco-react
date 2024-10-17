@@ -5,11 +5,7 @@ import { LeftOutlined } from '@ant-design/icons'
 import { useSearchParams, useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import spriteApi from '@/api/sprite/index'
-import type {
-  SpriteInfo,
-  SkillInfo,
-  SpriteEvolution,
-} from '@/api/sprite/type'
+import type { SpriteInfo, SkillInfo, SpriteEvolution } from '@/api/sprite/type'
 import type { IdDTO } from '@/api/commonType'
 
 const abilityColumns = [
@@ -46,8 +42,8 @@ const abilityColumns = [
   {
     title: '总和',
     dataIndex: 'total',
-    key: 'total'
-  }
+    key: 'total',
+  },
 ]
 
 const skillColunms = [
@@ -96,7 +92,7 @@ type SpriteAbilityType = {
   defense: number
   special_attack: number
   special_defense: number
-  speed: number,
+  speed: number
   total: number
   key: string
 }
@@ -120,7 +116,7 @@ const HandbookInfo = () => {
   const [skillList, setSkillList] = useState<SkillInfo[]>([])
   const [evolutionList, setEvolutionList] = useState<SpriteEvolution[][]>([[]])
   const navigate = useNavigate()
-  
+
   useEffect(() => {
     let params: IdDTO = {
       id: Number(searchParams.get('spriteId')),
@@ -220,7 +216,13 @@ const HandbookInfo = () => {
           special_attack: res.data.spAtk,
           special_defense: res.data.spDef,
           speed: res.data.speed,
-          total: res.data.hp + res.data.atk + res.data.def  + res.data.spAtk + res.data.spDef + res.data.speed,
+          total:
+            res.data.hp +
+            res.data.atk +
+            res.data.def +
+            res.data.spAtk +
+            res.data.spDef +
+            res.data.speed,
           key: '1',
         },
       ])

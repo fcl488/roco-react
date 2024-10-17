@@ -29,7 +29,7 @@ const Handbook = () => {
     console.log(import.meta.env.VITE_TARGET)
   }, [])
 
-  useEffect(() =>{
+  useEffect(() => {
     querySprite()
   }, [typeActive, currentPage, queryKeyword, sortFlag])
 
@@ -63,8 +63,11 @@ const Handbook = () => {
     // navigate('/layout/handbookInfo?spriteId=' + spriteId, {
     //   replace: false,
     // })
-    
-    window.open(baseUrl + '#/layout/handbookInfo?spriteId=' + spriteId, '_black')
+
+    window.open(
+      baseUrl + '#/layout/handbookInfo?spriteId=' + spriteId,
+      '_black'
+    )
   }
 
   const changeType = (typeId: number) => {
@@ -76,8 +79,8 @@ const Handbook = () => {
     setSprietList([])
   }
 
-  const changeKeyword = (value:string) => {
-    if(value === queryKeyword) {
+  const changeKeyword = (value: string) => {
+    if (value === queryKeyword) {
       return
     }
     setQueryKeyword(value)
@@ -103,14 +106,14 @@ const Handbook = () => {
     )
   })
 
-  const handleSpriteId = (id: number):string => {
-    if(id < 10) {
+  const handleSpriteId = (id: number): string => {
+    if (id < 10) {
       return '000' + id
-    }else if (id < 100) {
+    } else if (id < 100) {
       return '00' + id
-    }else if (id < 1000) {
+    } else if (id < 1000) {
       return '0' + id
-    }else {
+    } else {
       return '' + id
     }
   }
@@ -126,7 +129,9 @@ const Handbook = () => {
           <div className={style.handbook_list_card_img}>
             <Image width={200} preview={false} src={item.imgUrl} />
           </div>
-          <div className={style.handbook_list_card_number}>{handleSpriteId(item.id)}</div>
+          <div className={style.handbook_list_card_number}>
+            {handleSpriteId(item.id)}
+          </div>
           <div className={style.handbook_list_card_name}>{item.spriteName}</div>
           <div className='type' style={{ display: 'flex' }}>
             {item.types.map((el) => {
