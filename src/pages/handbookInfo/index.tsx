@@ -43,6 +43,11 @@ const abilityColumns = [
     dataIndex: 'speed',
     key: 'speed',
   },
+  {
+    title: '总和',
+    dataIndex: 'total',
+    key: 'total'
+  }
 ]
 
 const skillColunms = [
@@ -91,7 +96,8 @@ type SpriteAbilityType = {
   defense: number
   special_attack: number
   special_defense: number
-  speed: number
+  speed: number,
+  total: number
   key: string
 }
 
@@ -107,6 +113,7 @@ const HandbookInfo = () => {
       special_attack: 0,
       special_defense: 0,
       speed: 0,
+      total: 0,
       key: '1',
     },
   ])
@@ -212,6 +219,7 @@ const HandbookInfo = () => {
           special_attack: res.data.spAtk,
           special_defense: res.data.spDef,
           speed: res.data.speed,
+          total: res.data.hp + res.data.atk + res.data.def  + res.data.spAtk + res.data.spDef + res.data.speed,
           key: '1',
         },
       ])
