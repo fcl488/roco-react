@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { message } from 'antd'
 import store from '@/store'
+import { removeToken } from './token'
 
 const request = axios.create({
   baseURL: '/api',
@@ -41,6 +42,7 @@ request.interceptors.response.use(
   (error) => {
     console.log(error)
     message.error(error.message)
+    removeToken()
     window.location.href = '#/login'
     return Promise.reject(error)
   }
