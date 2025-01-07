@@ -7,10 +7,10 @@ type spriteType = {
 
 const styles = {
   grass: {
-    borderColor: '#b4f000',
-    backgroundColor: '#92bf19',
-    WebkitBoxShadow: '0 0 .25em .03em #92bf19',
-    boxShadow: '0 0 .25em .03em #92bf19',
+    borderColor: '#46c846',
+    backgroundColor: '#32b432',
+    WebkitBoxShadow: '0 0 .25em .03em #32b432',
+    boxShadow: '0 0 .25em .03em #32b432',
   },
   poison: {
     borderColor: '#d28cd2',
@@ -37,10 +37,10 @@ const styles = {
     boxShadow: '0 0 .25em .03em #0094e5',
   },
   bug: {
-    borderColor: '#46c846',
-    backgroundColor: '#32b432',
-    WebkitBoxShadow: '0 0 .25em .03em #32b432',
-    boxShadow: '0 0 .25em .03em #32b432',
+    borderColor: '#b4f000',
+    backgroundColor: '#92bf19',
+    WebkitBoxShadow: '0 0 .25em .03em #92bf19',
+    boxShadow: '0 0 .25em .03em #92bf19',
   },
   normal: {
     borderColor: '#dcdcdc',
@@ -146,22 +146,22 @@ const Type = ({ typeStr, name }: spriteType) => {
       return styles.ground
     }
     if ('ice' === type) {
-      return styles.ground
+      return styles.ice
     }
-    if ('ground' === type) {
-      return styles.ground
+    if ('steel' === type) {
+      return styles.steel
     }
     if ('fighting' === type) {
-      return styles.ground
+      return styles.fighting
     }
     if ('rock' === type) {
-      return styles.ground
+      return styles.rock
     }
     if ('ghost' === type) {
-      return styles.ground
+      return styles.ghost
     }
     if ('dragon' === type) {
-      return styles.ground
+      return styles.dragon
     }
     return undefined
   }

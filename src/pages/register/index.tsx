@@ -1,5 +1,10 @@
 import { Button, Form, Input, Card, message, Col, Row } from 'antd'
 import style from './index.module.scss'
+import userApi from '@/api/user'
+import { GetVerifyCodeDTO, RegisterDTO } from '@/api/user/type'
+import { useState } from 'react'
+import rsaUtil from '@/utils/rsaUtil'
+import { useNavigate } from 'react-router-dom'
 
 type FieldType = {
   account?: string
@@ -8,18 +13,46 @@ type FieldType = {
   verifyCode?: string
 }
 
-const Login = () => {
+const Register = () => {
   const [messageApi, contextHolder] = message.useMessage()
-  const onFinish = (values: FieldType) => {
-    console.log(values)
+  const [email, setEmail] = useState<string>('')
+  const navigate = useNavigate()
+  const onFinish = async (values: FieldType) => {
+    const publicKeyRes = await userApi.getPublicKey()
+    const dto: RegisterDTO = {
+      email: values.account as string,
+      password: rsaUtil.encode(values.password as string, publicKeyRes.data),
+      rePassword: rsaUtil.encode(values.repassword as string, publicKeyRes.data),
+      verifyCode: values.verifyCode as string,
+    }
+    const res = await userApi.register(dto)
+    if (res.code === 0) {
+      messageApi.success('注册成功,请前往登录页面').then(() => {
+        navigate('/login', {
+          replace: false,
+        })
+      })
+    } else {
+      messageApi.error('注册失败,如有问题请联系1397697356@qq.com')
+    }
   }
 
   const onFinishFailed = (_values: any) => {
     messageApi.error('Please enter correct information')
   }
 
-  const getVerifyCode = () => {
+  const getVerifyCode = async () => {
     console.log('获取邮箱验证码')
+    const dto: GetVerifyCodeDTO = {
+      email: email,
+      type: 100,
+    }
+    const res = await userApi.getVerifyCode(dto)
+    if (res.code === 0) {
+      messageApi.success('验证码发送成功,请前往邮箱查看')
+    } else {
+      messageApi.error('验证码发送失败,如有问题请联系1397697356@qq.com')
+    }
   }
 
   return (
@@ -59,7 +92,10 @@ const Login = () => {
                   },
                 ]}
               >
-                <Input />
+                <Input
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
               </Form.Item>
 
               <Form.Item<FieldType>
@@ -134,4 +170,4 @@ const Login = () => {
   )
 }
 
-export default Login
+export default Register

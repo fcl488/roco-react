@@ -1,21 +1,22 @@
 import style from './index.module.scss'
 import { useState, useEffect } from 'react'
 import { Input, Select, Card, Col, Row, Image, Empty } from 'antd'
-import { useNavigate } from 'react-router-dom'
+// import { useNavigate } from 'react-router-dom'
 import Type from '@/compoments/type'
 import type { SpriteType, QuerySpriteDTO, Sprite } from '@/api/sprite/type'
 import spriteApi from '@/api/sprite/index'
 const { Search } = Input
 
 const Handbook = () => {
-  const navigate = useNavigate()
+  // const navigate = useNavigate()
   const [typeActive, setTypeActive] = useState<number>(0)
   const [typeList, setTypeList] = useState<SpriteType[]>([])
   const [spriteList, setSprietList] = useState<Sprite[]>([])
   const [totalSpriteCount, setTotalSpriteCount] = useState<number>(0)
   const [currentPage, setCurrnetPage] = useState<number>(1)
   const [queryKeyword, setQueryKeyword] = useState<string>('')
-  const [sortFlag, setSortFlag] = useState<number>(0)
+  const [sortFlag, setSortFlag] = useState<number>(1)
+  const [baseUrl, setBaseUrl] = useState<string>('')
 
   useEffect(() => {
     const getAllTypes = async () => {
@@ -24,16 +25,18 @@ const Handbook = () => {
     }
     getAllTypes()
     querySprite()
+    setBaseUrl(import.meta.env.VITE_TARGET)
+    console.log(import.meta.env.VITE_TARGET)
   }, [])
 
-  useEffect(() =>{
+  useEffect(() => {
     querySprite()
   }, [typeActive, currentPage, queryKeyword, sortFlag])
 
   const querySprite = async () => {
     const dto: QuerySpriteDTO = {
       page: currentPage,
-      limit: 2,
+      limit: 40,
       keyword: queryKeyword,
       sort: sortFlag,
       type: typeActive,
@@ -57,9 +60,14 @@ const Handbook = () => {
   }
 
   const toInfoPage = (spriteId: number) => {
-    navigate('/layout/handbookInfo?spriteId=' + spriteId, {
-      replace: false,
-    })
+    // navigate('/layout/handbookInfo?spriteId=' + spriteId, {
+    //   replace: false,
+    // })
+
+    window.open(
+      baseUrl + '#/layout/handbookInfo?spriteId=' + spriteId,
+      '_black'
+    )
   }
 
   const changeType = (typeId: number) => {
@@ -71,11 +79,13 @@ const Handbook = () => {
     setSprietList([])
   }
 
-  const changeKeyword = (value:string) => {
-    if(value === queryKeyword) {
+  const changeKeyword = (value: string) => {
+    if (value === queryKeyword) {
       return
     }
     setQueryKeyword(value)
+    setTypeActive(0)
+    setSprietList([])
     setCurrnetPage(1)
   }
 
@@ -96,6 +106,18 @@ const Handbook = () => {
     )
   })
 
+  const handleSpriteId = (id: number): string => {
+    if (id < 10) {
+      return '000' + id
+    } else if (id < 100) {
+      return '00' + id
+    } else if (id < 1000) {
+      return '0' + id
+    } else {
+      return '' + id
+    }
+  }
+
   const renderHandbook = spriteList.map((item) => {
     return (
       <Col span={6} key={item.id}>
@@ -107,7 +129,9 @@ const Handbook = () => {
           <div className={style.handbook_list_card_img}>
             <Image width={200} preview={false} src={item.imgUrl} />
           </div>
-          <div className={style.handbook_list_card_number}>{item.id}</div>
+          <div className={style.handbook_list_card_number}>
+            {handleSpriteId(item.id)}
+          </div>
           <div className={style.handbook_list_card_name}>{item.spriteName}</div>
           <div className='type' style={{ display: 'flex' }}>
             {item.types.map((el) => {
@@ -155,7 +179,7 @@ const Handbook = () => {
       </div>
       <div className={style.banner}>
         <Select
-          defaultValue={0}
+          defaultValue={1}
           style={{ width: 200, height: 30 }}
           onChange={handleChange}
           options={[

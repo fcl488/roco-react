@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { message } from 'antd'
 import store from '@/store'
+import { removeToken } from './token'
 
 const request = axios.create({
   baseURL: '/api',
@@ -24,22 +25,25 @@ request.interceptors.request.use(
 
 request.interceptors.response.use(
   (response) => {
-    console.log(response)
     let res = response.data
     if (res.code === 0) {
-        return response.data
+      return res
     } else if (res.code === 40000 || res.code === 40100 || res.code === 40101 || res.code === 40400 || res.code === 50000) {
-        // 40100 如果未登录跳转到登录页面
-
-        message.error(res.message)
-        return Promise.reject(new Error(res.message))
+      // 40100 如果未登录跳转到登录页面
+      message.error(res.message)
+      if (40100 === res.code) {
+        window.location.href = '#/login'
+      }
+      return Promise.reject(new Error(res.message))
     } else {
-        return response.data
+      return res
     }
   },
   (error) => {
     console.log(error)
     message.error(error.message)
+    removeToken()
+    window.location.href = '#/login'
     return Promise.reject(error)
   }
 )

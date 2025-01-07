@@ -121,7 +121,7 @@
   background-color: #f2f3f5;
   padding: 6px 0;
   height: 100%;
-  margin-bottom: 6rem;
+  // margin-bottom: 2rem;
   &_content {
     color: #000;
     font-size: 1.6rem;
@@ -131,5 +131,17 @@
     margin: 0 auto;
     background-color: #fff;
     padding: 10px;
+  }
+}
+
+.footer {
+  background: #000;
+  .content {
+    max-width: 1400px;
+    width: 100%;
+    margin: 0 auto;
+    color: #fff;
+    font-size: 1.3rem;
+    padding: 1.5rem 0;
   }
 }

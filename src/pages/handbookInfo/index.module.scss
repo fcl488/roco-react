@@ -21,6 +21,14 @@
     }
     &_desc {
       font-size: 1.8rem;
+      &_box {
+        width: 50rem;
+        display: flex;
+        flex-wrap: wrap;
+        &_item {
+          margin: 1rem;
+        }
+      }
     }
   }
   &_racial {
@@ -30,6 +38,7 @@
     &_chain {
       display: flex;
       justify-content: center;
+      align-items: center;
       margin-top: 1rem;
       &_item {
         margin-right: 8rem;

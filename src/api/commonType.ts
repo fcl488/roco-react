@@ -13,4 +13,8 @@ export type PageVO = {
   total: string
 }
 
+export type IdDTO = {
+  id: number
+}
+
 export type CommonRes = BaseResult<any>
